@@ -1,1 +1,1 @@
-# Project-1-Lexical-Analyzer
+# Project 1 Lexical Analyzer
