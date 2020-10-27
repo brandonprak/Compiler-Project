@@ -4,13 +4,13 @@ import java.util.regex.Pattern;
 /**
  *Basic trie implementation of a table.
  *
- *<p>Keys are {@code String}s matching the regular expression [A-Za-z][A-Za-z0-9]*
+ *<p>Keys are {@code String}s matching the regular expression [A-Za-z][A-Za-z0-9_]*
  *
  *@param <V> Type of mapped values
  */
 public class Trie<V>{
 	
-	private static final Pattern KEY_PATTERN = Pattern.compile("[A-Za-z][A-Za-z0-9]*");
+	private static final Pattern KEY_PATTERN = Pattern.compile("[A-Za-z][A-Za-z0-9_]*");
 	private static final char    EMPTY = '.', SEPARATOR = '*', VALUE = '#';
 	private static final int     DEFAULT_INIT_SSIZE = 512, DEFAULT_INIT_VSIZE = 16;
 	
