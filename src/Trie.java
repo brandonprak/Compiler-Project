@@ -71,10 +71,10 @@ public class Trie<V>{
 	 *@throws IllegalArgumentException If the key being reserved does not match the regular expression given above.
 	 */
 	public void reserve(String s){
-		reserve(s, 0);
+		reserveInternal(s);
 	}
 	
-	private int reserve(String s, int unused /*to overload method*/){
+	private int reserveInternal(String s){
 		if(!matches(KEY_PATTERN, s))
 			throw new IllegalArgumentException("Invalid key: " + s);
 		
@@ -92,7 +92,7 @@ public class Trie<V>{
 	 *@throws IllegalArgumentException If the key being mapped to does not match the regular expression given above.
 	 */
 	public void put(String s, V value){
-		int index = reserve(s, 0);
+		int index = reserveInternal(s);
 		
 		index = next[index];
 		
