@@ -41,113 +41,144 @@ public class Lexer {
 
             // EOF
             case EOF_CHAR:
-                tokens.add(ToyToken._eof);
+                tokens.add(new ToyToken(ToyToken.Type._eof));
                 eof = true;
                 break;
 
             // String Constants
             case '"':
-                while ((curr = readChar()) != '"') {}
-                tokens.add(ToyToken._stringconstant);
+				StringBuilder sb = new StringBuilder();
+			
+                while ((curr = readChar()) != '"') {
+					if(curr == '\\'){
+						curr = readChar();
+						
+						switch(curr){
+							case '\\':
+								sb.append('\\');
+								break;
+							case '"':
+								sb.append('"');
+								break;
+							case 'n':
+								sb.append('\n');
+								break;
+							case 'r':
+								sb.append('\r');
+								break;
+							case 't':
+								sb.append('\t');
+								break;
+							case '0':
+								sb.append('\0');
+								break;
+							default:
+								lexException("Invalid escape character: \\" + curr);
+						}
+					}
+					else
+						sb.append(curr);
+				}
+                tokens.add(new ToyToken(ToyToken.Type._stringconstant, sb.toString()));
                 break;
 
             // Single Character Symbols/Operators
             case '+':
-                tokens.add(ToyToken._plus);
+                tokens.add(new ToyToken(ToyToken.Type._plus));
                 break;
             case '-':
-                tokens.add(ToyToken._minus);
+                tokens.add(new ToyToken(ToyToken.Type._minus));
                 break;
             case '*':
-                tokens.add(ToyToken._multiplication);
+                tokens.add(new ToyToken(ToyToken.Type._multiplication));
                 break;
             case '/':
-                tokens.add(ToyToken._division);
+                tokens.add(new ToyToken(ToyToken.Type._division));
                 break;
             case '%':
-                tokens.add(ToyToken._mod);
+                tokens.add(new ToyToken(ToyToken.Type._mod));
                 break;
             case ';':
-                tokens.add(ToyToken._semicolon);
+                tokens.add(new ToyToken(ToyToken.Type._semicolon));
                 break;
             case ',':
-                tokens.add(ToyToken._comma);
+                tokens.add(new ToyToken(ToyToken.Type._comma));
                 break;
             case '.':
-                tokens.add(ToyToken._period);
+                tokens.add(new ToyToken(ToyToken.Type._period));
                 break;
             case '(':
-                tokens.add(ToyToken._leftparen);
+                tokens.add(new ToyToken(ToyToken.Type._leftparen));
                 break;
             case ')':
-                tokens.add(ToyToken._rightparen);
+                tokens.add(new ToyToken(ToyToken.Type._rightparen));
                 break;
             case '[':
-                tokens.add(ToyToken._leftbracket);
+                tokens.add(new ToyToken(ToyToken.Type._leftbracket));
                 break;
             case ']':
-                tokens.add(ToyToken._rightbracket);
+                tokens.add(new ToyToken(ToyToken.Type._rightbracket));
                 break;
             case '{':
-                tokens.add(ToyToken._leftbrace);
+                tokens.add(new ToyToken(ToyToken.Type._leftbrace));
                 break;
             case '}':
-                tokens.add(ToyToken._rightbrace);
+                tokens.add(new ToyToken(ToyToken.Type._rightbrace));
                 break;
 
             // Multi-Character Operators
             case '<':
                 peek = readChar();
                 if (peek == '=') {
-                    tokens.add(ToyToken._lessequal);
+                    tokens.add(new ToyToken(ToyToken.Type._lessequal));
                 } else {
                     pushback( peek);
-                    tokens.add(ToyToken._less);
+                    tokens.add(new ToyToken(ToyToken.Type._less));
                 }
                 break;
             case '>':
                 peek = readChar();
                 if (peek == '=') {
-                    tokens.add(ToyToken._greaterequal);
+                    tokens.add(new ToyToken(ToyToken.Type._greaterequal));
                 } else {
                     pushback( peek);
-                    tokens.add(ToyToken._greater);
+                    tokens.add(new ToyToken(ToyToken.Type._greater));
                 }
                 break;
             case '=':
                 peek = readChar();
                 if (peek == '=') {
-                    tokens.add(ToyToken._equal);
+                    tokens.add(new ToyToken(ToyToken.Type._equal));
                 } else {
                     pushback( peek);
-                    tokens.add(ToyToken._assignop);
+                    tokens.add(new ToyToken(ToyToken.Type._assignop));
                 }
                 break;
             case '!':
                 peek = readChar();
                 if (peek == '=') {
-                    tokens.add(ToyToken._notequal);
+                    tokens.add(new ToyToken(ToyToken.Type._notequal));
                 } else {
                     pushback( peek);
-                    tokens.add(ToyToken._not);
+                    tokens.add(new ToyToken(ToyToken.Type._not));
                 }
                 break;
             case '&':
                 peek = readChar();
                 if (peek == '&') {
-                    tokens.add(ToyToken._and);
+                    tokens.add(new ToyToken(ToyToken.Type._and));
                 } else {
                     pushback( peek);
-                    tokens.add(ToyToken._ERROR);
+                    tokens.add(new ToyToken(ToyToken.Type._ERROR));
                 }
                 break;
             case '|':
                 peek = readChar();
                 if (peek == '|') {
-                    tokens.add(ToyToken._or);
+                    tokens.add(new ToyToken(ToyToken.Type._or));
                 } else {
                     pushback( peek);
-                    tokens.add(ToyToken._ERROR);
+                    tokens.add(new ToyToken(ToyToken.Type._ERROR));
                 }
                 break;
         }
@@ -169,94 +200,104 @@ public class Lexer {
             switch (s) {
                 case "true":
                 case "false":
-                    tokens.add(ToyToken._booleanconstant);
+                    tokens.add(new ToyToken(ToyToken.Type._booleanconstant, s));
                     break;
                 case "boolean":
-                    tokens.add(ToyToken._boolean);
+                    tokens.add(new ToyToken(ToyToken.Type._boolean));
                     break;
                 case "break":
-                    tokens.add(ToyToken._break);
+                    tokens.add(new ToyToken(ToyToken.Type._break));
                     break;
                 case "class":
-                    tokens.add(ToyToken._class);
+                    tokens.add(new ToyToken(ToyToken.Type._class));
                     break;
                 case "double":
-                    tokens.add(ToyToken._double);
+                    tokens.add(new ToyToken(ToyToken.Type._double));
                     break;
                 case "else":
-                    tokens.add(ToyToken._else);
+                    tokens.add(new ToyToken(ToyToken.Type._else));
                     break;
                 case "extends":
-                    tokens.add(ToyToken._extends);
+                    tokens.add(new ToyToken(ToyToken.Type._extends));
                     break;
                 case "for":
-                    tokens.add(ToyToken._for);
+                    tokens.add(new ToyToken(ToyToken.Type._for));
                     break;
                 case "if":
-                    tokens.add(ToyToken._if);
+                    tokens.add(new ToyToken(ToyToken.Type._if));
                     break;
                 case "implements":
-                    tokens.add(ToyToken._implements);
+                    tokens.add(new ToyToken(ToyToken.Type._implements));
                     break;
                 case "int":
-                    tokens.add(ToyToken._int);
+                    tokens.add(new ToyToken(ToyToken.Type._int));
                     break;
                 case "interface":
-                    tokens.add(ToyToken._interface);
+                    tokens.add(new ToyToken(ToyToken.Type._interface));
                     break;
                 case "newarray":
-                    tokens.add(ToyToken._newarray);
+                    tokens.add(new ToyToken(ToyToken.Type._newarray));
                     break;
                 case "println":
-                    tokens.add(ToyToken._println);
+                    tokens.add(new ToyToken(ToyToken.Type._println));
                     break;
                 case "readln":
-                    tokens.add(ToyToken._readln);
+                    tokens.add(new ToyToken(ToyToken.Type._readln));
                     break;
                 case "return":
-                    tokens.add(ToyToken._return);
+                    tokens.add(new ToyToken(ToyToken.Type._return));
                     break;
                 case "string":
-                    tokens.add(ToyToken._string);
+                    tokens.add(new ToyToken(ToyToken.Type._string));
                     break;
                 case "void":
-                    tokens.add(ToyToken._void);
+                    tokens.add(new ToyToken(ToyToken.Type._void));
                     break;
                 case "while":
-                    tokens.add(ToyToken._while);
+                    tokens.add(new ToyToken(ToyToken.Type._while));
                     break;
                 default:
-                    tokens.add(ToyToken._id);
+                    tokens.add(new ToyToken(ToyToken.Type._id, s));
                     table.reserve(s);
             }
         }
         // Digits
         else if (Character.isDigit(curr)) {
             peek = readChar();
-
+			
+			StringBuilder sb = new StringBuilder(curr);
             // Hex Int
             if (curr == '0' && Character.toUpperCase(peek) == 'X') {
                 curr = readChar();
+				sb.append(peek).append(curr);
                 if (isHexDigit(curr)) {
-                    tokens.add(ToyToken._intconstant);
-                    while (isHexDigit(curr = readChar())) {}
+                    while (isHexDigit(curr = readChar())) {sb.append(curr);}
+                    tokens.add(new ToyToken(ToyToken.Type._intconstant, sb.toString()));
                     pushback(curr);
                 } else {
-                    tokens.add(ToyToken._intconstant);
+                    //tokens.add(ToyToken._intconstant);
+					
+					//I think this case is an error, 0x cannot prefix any token aside from a hex int. -R
+					
+					lexException(new ToyToken(ToyToken.Type._ERROR, sb.toString()));
+					
                     pushback(curr);
                     pushback(peek);
                 }
             // Doubles and Decimal Ints
             } else {
                 pushback(peek);
-                while (Character.isDigit(curr))
-                    curr = readChar();
+                while (Character.isDigit(curr)){
+					curr = readChar();
+					sb.append(curr);
+				}
 
                 if (curr == '.') {
-                    handleDouble();
+                    handleDouble(sb);
                 } else {
+					sb.deleteCharAt(sb.length() - 1);
                     pushback(curr);
-                    tokens.add(ToyToken._intconstant);
+                    tokens.add(new ToyToken(ToyToken.Type._intconstant, sb.toString()));
                 }
             }
         }
@@ -266,16 +307,17 @@ public class Lexer {
      * Handles double constants. Method is called ONLY after a '.' has been
      * read in from the input stream.
      */
-    private void handleDouble() throws IOException {
+    private void handleDouble(StringBuilder sb) throws IOException {
         char curr;
 
-        while (Character.isDigit(curr = readChar())) {}
+        while (Character.isDigit(curr = readChar())) sb.append(curr);
 
         // Checks for exponents
         if (Character.toUpperCase(curr) == 'E') {
-            handleExponent(curr);
+            handleExponent(curr, sb);
         } else {
-            tokens.add(ToyToken._doubleconstant);
+			sb.deleteCharAt(sb.length() - 1);
+            tokens.add(new ToyToken(ToyToken.Type._doubleconstant, sb.toString()));
             pushback(curr);
         }
     }
@@ -286,33 +328,41 @@ public class Lexer {
      * @param curr - character with value of 'E' or 'e'
      * @throws IOException
      */
-    private void handleExponent(char curr) throws IOException {
+    private void handleExponent(char curr, StringBuilder sb) throws IOException {
         char peek1, peek2;
         peek1 = readChar();
+		
+		sb.append(peek1);
 
         // E#...#
         if (Character.isDigit(peek1)) {
-            while (Character.isDigit(peek1 = readChar())) {}
+            while (Character.isDigit(peek1 = readChar())) sb.append(peek1);
             pushback(peek1);
             // E+ or E-
         } else if (peek1 == '-' || peek1 == '+') {
             peek2 = readChar();
+			sb.append(peek2);
             // At least 1 character after +/- to be valid
             if (Character.isDigit(peek2)) {
-                while (Character.isDigit(peek2 = readChar())) {}
+                while (Character.isDigit(peek2 = readChar())) sb.append(peek2);
                 pushback(peek2);
             // Invalid exponential form, push back characters that will be used for other tokens
             } else {
                 pushback(peek2); 	// Pushback character after +/-
                 pushback(peek1); 	// Pushback + or -
                 pushback(curr); 	// Pushback e or E
+				
+				lexException(new ToyToken(ToyToken.Type._ERROR, sb.toString()));
             }
             // E followed by invalid character, push characters back
         } else {
             pushback(peek1);
             pushback(curr);
+			
+			lexException(new ToyToken(ToyToken.Type._ERROR, sb.toString()));
         }
-        tokens.add(ToyToken._doubleconstant);
+		sb.deleteCharAt(sb.length() - 1);
+        tokens.add(new ToyToken(ToyToken.Type._doubleconstant, sb.toString()));
     }
 
     /**
@@ -351,7 +401,15 @@ public class Lexer {
             }
         }
     }
-
+	
+	
+	private void lexException(ToyToken t){
+		lexException((t != null) ? "Invalid token read: " + t.toString() : "Invalid token read: [cannot print]");
+	}
+	
+	private void lexException(String s){
+		throw new RuntimeException(s);
+	}
 
     /**
      * Checks if parameter c is a whitespace character
@@ -361,7 +419,7 @@ public class Lexer {
      */
     private boolean isWhiteSpace(char c) {
         if (c == '\r')
-            tokens.add(ToyToken._carriageReturn);
+            tokens.add(new ToyToken(ToyToken.Type._carriageReturn));
         return (c == ' ') || (c == '\t') || (c == '\n') || (c == '\r');
     }
 
@@ -388,7 +446,7 @@ public class Lexer {
                 peek = readChar();
                 switch (peek) {
                     case '/':
-                        tokens.add(ToyToken._carriageReturn);
+                        tokens.add(new ToyToken(ToyToken.Type._carriageReturn));
                         while ((curr = readChar()) != '\r') {}
                         curr = readChar();
                         break;
@@ -397,7 +455,7 @@ public class Lexer {
                         peek = readChar();
                         while (curr != '*' || peek != '/') {
                             if (curr == '\r')
-                                tokens.add(ToyToken._carriageReturn);
+                                tokens.add(new ToyToken(ToyToken.Type._carriageReturn));
                             curr = peek;
                             peek = readChar();
                         }
@@ -464,77 +522,103 @@ public class Lexer {
         System.out.println(table);
     }
 	
-    /**
-     *
-     * Tokens are implemented using an enum. Each token is assigned a unique
-     * number to be used in the future with the syntax analyzer.
-     *
-     */
-    private enum ToyToken {
-        _boolean(1, "boolean"),
-        _break(2, "break"),
-        _class(3, "class"),
-        _double(4, "double"),
-        _else(5, "else"),
-        _extends(6, "extends"),
-        _for(7, "for"),
-        _if(8, "if"),
-        _implements(9, "implements"),
-        _int(10, "int"),
-        _interface(11, "interface"),
-        _newarray(12, "newarray"),
-        _println(13, "println"),
-        _readln(14, "readln"),
-        _return(15, "return"),
-        _string(16, "string"),
-        _void(17, "void"),
-        _while(18, "while"),
-        _plus(19, "plus"),
-        _minus(20, "minus"),
-        _multiplication(21, "multiplication"),
-        _division(22, "division"),
-        _mod(23, "mod"),
-        _less(24, "less"),
-        _lessequal(25, "lessequal"),
-        _greater(26, "greater"),
-        _greaterequal(27, "greaterequal"),
-        _equal(28, "equal"),
-        _notequal(29, "notequal"),
-        _and(30, "and"),
-        _or(31, "or"),
-        _not(32, "not"),
-        _assignop(33, "assignop"),
-        _semicolon(34, "semicolon"),
-        _comma(35, "comma"),
-        _period(36, "period"),
-        _leftparen(37, "leftparen"),
-        _rightparen(38, "rightparen"),
-        _leftbracket(39, "leftbracket"),
-        _rightbracket(40, "rightbracket"),
-        _leftbrace(41, "leftbrace"),
-        _rightbrace(42, "rightbrace"),
-        _intconstant(43, "intconstant"),
-        _doubleconstant(44, "doubleconstant"),
-        _stringconstant(45, "stringconstant"),
-        _booleanconstant(46, "booleanconstant"),
-        _id(47, "id"),
-        _carriageReturn(48, "carriage"),
-        _eof(49, "EOF"),
-        _ERROR(50, "ERROR_TOKEN");
+	
+	private static class ToyToken{
+		
+		public Type type;
+		public String value;
+		
+		public ToyToken(Type t, String val){
+			type = (t != null) ? t : Type._INVALID_OR_UNDEFINED;
+			value = val;
+		}
+		
+		public ToyToken(Type t){
+			this(t, null);
+		}
+		
+		@Override
+		public String toString(){
+			if(type == Type._eof || type == Type._ERROR || type == Type._INVALID_OR_UNDEFINED || type == null)
+				return "";
+			return type.toString();
+		}
+		
+		/**
+		 *
+		 * Tokens are implemented using an enum. Each token is assigned a unique
+		 * number to be used in the future with the syntax analyzer.
+		 *
+		 */
+		public enum Type {
+			_boolean(1, "boolean"),
+			_break(2, "break"),
+			_class(3, "class"),
+			_double(4, "double"),
+			_else(5, "else"),
+			_extends(6, "extends"),
+			_for(7, "for"),
+			_if(8, "if"),
+			_implements(9, "implements"),
+			_int(10, "int"),
+			_interface(11, "interface"),
+			_newarray(12, "newarray"),
+			_println(13, "println"),
+			_readln(14, "readln"),
+			_return(15, "return"),
+			_string(16, "string"),
+			_void(17, "void"),
+			_while(18, "while"),
+			_plus(19, "plus"),
+			_minus(20, "minus"),
+			_multiplication(21, "multiplication"),
+			_division(22, "division"),
+			_mod(23, "mod"),
+			_less(24, "less"),
+			_lessequal(25, "lessequal"),
+			_greater(26, "greater"),
+			_greaterequal(27, "greaterequal"),
+			_equal(28, "equal"),
+			_notequal(29, "notequal"),
+			_and(30, "and"),
+			_or(31, "or"),
+			_not(32, "not"),
+			_assignop(33, "assignop"),
+			_semicolon(34, "semicolon"),
+			_comma(35, "comma"),
+			_period(36, "period"),
+			_leftparen(37, "leftparen"),
+			_rightparen(38, "rightparen"),
+			_leftbracket(39, "leftbracket"),
+			_rightbracket(40, "rightbracket"),
+			_leftbrace(41, "leftbrace"),
+			_rightbrace(42, "rightbrace"),
+			_intconstant(43, "intconstant"),
+			_doubleconstant(44, "doubleconstant"),
+			_stringconstant(45, "stringconstant"),
+			_booleanconstant(46, "booleanconstant"),
+			_id(47, "id"),
+			_carriageReturn(48, "carriage"),
+			_eof(49, "EOF"),
+			_ERROR(50, "ERROR_TOKEN"),
+			_INVALID_OR_UNDEFINED(51, "INVALID_OR_UNDEFINED_TOKEN");
 
-        private final int tokenNum;
-        private final String tokenString;
+			private final int tokenNum;
+			private final String tokenString;
 
-        ToyToken(int num, String keyword) {
-            tokenNum = num; tokenString = keyword;
-        }
+			Type(int num, String keyword) {
+				tokenNum = num; tokenString = keyword;
+			}
 
-        public int getTokenNumber() {
-            return tokenNum;
-        }
+			public int getTokenNumber() {
+				return tokenNum;
+			}
 
-        public String toString() {
-            return tokenString;
-        }
-    }
+			public String toString() {
+				return tokenString;
+			}
+		}
+		
+		
+	}
 }
