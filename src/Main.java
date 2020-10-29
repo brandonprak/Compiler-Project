@@ -11,10 +11,10 @@ public class Main {
         while (!lexer.isEOF())
             lexer.scanNextToken();
 
-        System.out.println(("\n------------- TOKEN OUTPUT -----------------"));
+        System.out.println(("\nToken Output"));
         lexer.dumpTokens();
         System.out.println();
-        System.out.println(("\n------------- SYMBOL TABLE OUTPUT -----------"));
+        System.out.println(("\nSymbol Table"));
         lexer.dumpSymbolTable();
         System.out.println();
     }
