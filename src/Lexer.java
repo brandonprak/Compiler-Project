@@ -2,10 +2,9 @@ import java.io.*;
 import java.util.*;
 
 /**
- * This class implements a lexical analyzer for the Toy language. Tokens are
- * read in and placed into a linked list so that they can be output whenever
- * needed. The lexer spots scanning tokens when the end of the file has been
- * reached.
+ * Implements a lexical analyzer for the Toy language. Tokens are read in
+ * and placed into a list so that they can be output whenever needed.
+ * The lexer spots scanning tokens when the end of the file has been reached.
  */
 public class Lexer {
     private static final char EOF_CHAR = (char) -1;

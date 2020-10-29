@@ -7,7 +7,7 @@ public class Main {
         PushbackReader source = new PushbackReader(new FileReader(filename), 3);
         Lexer lexer = new Lexer(source);
 
-        // scan tokens until end of file
+        // Scan tokens until end of file
         while (!lexer.isEOF())
             lexer.scanNextToken();
 
