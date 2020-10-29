@@ -10,7 +10,7 @@ public class Lexer {
     private static final char EOF_CHAR = (char) -1;
     private PushbackReader source;
     private List<ToyToken> tokens;
-    private trie table;
+    private Trie<String> table;
     private boolean eof;
 
     /**
@@ -21,7 +21,7 @@ public class Lexer {
     public Lexer(PushbackReader source) {
         this.source = source;
         tokens = new LinkedList<ToyToken>();
-        table = new trie();
+        table = new Trie<String>();
         eof = false;
         insertKeywords(); // Initialize the symbol table with the keywords
     }
@@ -227,7 +227,7 @@ public class Lexer {
                     break;
                 default:
                     tokens.add(ToyToken._id);
-                    table.insert(s);
+                    table.reserve(s);
             }
         }
         // Digits
@@ -341,7 +341,7 @@ public class Lexer {
      * Prints out the tokens to System.out
      */
     public void dumpTokens() {
-        Iterator<ToyToken> iter = tokens.iterator();
+        Iterator<ToyToken> iter = tokens.iterator();	//You can use an enhanced for loop for this. -R
         while (iter.hasNext()) {
             ToyToken t = iter.next();
             if (t.toString().equals("carriage")) {
@@ -438,229 +438,32 @@ public class Lexer {
      * Insert the keywords of the Toy language into the symbol table
      */
     private void insertKeywords() {
-        table.insert("boolean");
-        table.insert("break");
-        table.insert("class");
-        table.insert("double");
-        table.insert("else");
-        table.insert("extends");
-        table.insert("false");
-        table.insert("for");
-        table.insert("if");
-        table.insert("implements");
-        table.insert("int");
-        table.insert("interface");
-        table.insert("newarray");
-        table.insert("println");
-        table.insert("readln");
-        table.insert("return");
-        table.insert("string");
-        table.insert("true");
-        table.insert("void");
-        table.insert("while");
+        table.reserve("boolean");
+        table.reserve("break");
+        table.reserve("class");
+        table.reserve("double");
+        table.reserve("else");
+        table.reserve("extends");
+        table.reserve("false");
+        table.reserve("for");
+        table.reserve("if");
+        table.reserve("implements");
+        table.reserve("int");
+        table.reserve("interface");
+        table.reserve("newarray");
+        table.reserve("println");
+        table.reserve("readln");
+        table.reserve("return");
+        table.reserve("string");
+        table.reserve("true");
+        table.reserve("void");
+        table.reserve("while");
     }
 
     public void dumpSymbolTable() {
-        table.print(15);
+        System.out.println(table);
     }
-
-    /**
-     * This class implements a Trie data structure to be used as a symbol
-     * table for the lexical analyzer.
-     *
-     */
-    private static class trie {
-        private static final int MAX_TRANSITION = 250;
-        private static final int ALPHABETIC_CHARS = 52;
-        private static final int EMPTY = -1;
-        private static final char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'
-                , 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X'
-                , 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
-                , 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-        private int nextFreeSpot;
-        private int[] trieSwitch;
-        private char[] trieSymbol;
-        private int[] trieNext;
-
-        /**
-         * Constructor
-         */
-        public trie() {
-            nextFreeSpot = 0;
-            trieSwitch = new int [ALPHABETIC_CHARS];
-
-            for (int i = 0; i < trieSwitch.length; i++)
-                trieSwitch[i] = EMPTY;
-
-            trieSymbol = new char [MAX_TRANSITION];
-            trieNext = new int[MAX_TRANSITION];
-
-            for (int i = 0; i < trieSymbol.length; i++) {
-                trieSymbol[i] = ' ';
-                trieNext[i] = EMPTY;
-            }
-        }
-
-        // Prints out the contents of this trie in a column format
-        public void print(int cols) {
-            // Print alphabet and switch array
-            int i = 0;
-            while (i < alphabet.length) {
-                System.out.printf("%7s\t", "");
-                for (int j = 0; j < cols; j++) {
-                    if (j + i < alphabet.length) {
-                        System.out.printf("%3c", alphabet[j + i]);
-                        System.out.print(' ');
-                    }
-                }
-                System.out.print("\nswitch:\t");
-                for (int j = 0; j < cols; j++) {
-                    if (j + i < alphabet.length) {
-                        System.out.printf("%3d", trieSwitch[j + i]);
-                        System.out.print(' ');
-                    }
-                }
-                System.out.print("\n\n");
-                i += cols;
-            }
-            // Print out the symbols stored and ptrs
-            i = 0;
-            while (i < trieSymbol.length) {
-                System.out.printf("%7s\t", "");
-                for (int j = 0; j < cols; j++) {
-                    if (j + i < trieSymbol.length) {
-                        System.out.printf("%3d", j + i);
-                        System.out.print(' ');
-                    }
-                }
-                System.out.print("\nsymbol: ");
-                for (int j = 0; j < cols; j++) {
-                    if (j + i < trieSymbol.length) {
-                        if (trieSymbol[j + i] != ' ') {
-                            System.out.printf("%3c", trieSymbol[j + i]);
-                            System.out.print(' ');
-                        } else {
-                            System.out.printf("%3s", "");
-                            System.out.print(' ');
-                        }
-
-                    }
-                }
-                System.out.print("\nnext:  \t");
-                for (int j = 0; j < cols; j++) {
-                    if (j + i < trieNext.length) {
-                        if (trieNext[j + i] != -1) {
-                            System.out.printf("%3d", trieNext[j + i]);
-                            System.out.print(' ');
-                        } else {
-                            System.out.printf("%3s", "");
-                            System.out.print(' ');
-                        }
-
-                    }
-                }
-                System.out.print("\n\n");
-                i += cols;
-            }
-        }
-
-        /**
-         * Inserts a string into the trie table.
-         *
-         * @param s - string to be inserted
-         * @return true if s inserted into table, false if s already exists
-         */
-        void insert(String s) {
-            int charPos = 0;
-            char c = s.charAt(charPos++);
-            int switchIndex = getSwitchIndex(c);
-
-            // If switch is undefined using switchIndex, create immediately
-            if (trieSwitch[switchIndex] == EMPTY) {
-                trieSwitch[switchIndex] = nextFreeSpot;
-
-                // 1 char name (e.g. "a")
-                if (s.length() == 1) {
-                    trieSymbol[nextFreeSpot++] = '@';
-                } else {
-                    create(s.substring(1), nextFreeSpot);
-                }
-                return;
-            }
-
-            int ptr = trieSwitch[switchIndex];
-            // Start with next character in string to traverse symbol table.
-            // If string was one char long, '@' must be next char
-            if (charPos < s.length()) {
-                c = s.charAt(charPos++);
-            } else {
-                c = '@';
-            }
-
-            boolean exit = false;
-            while (!exit) {
-                if (trieSymbol[ptr] == c) {
-                    // If c is not the terminal symbol, move to next spot
-                    if (c != '@') {
-                        ptr++;
-                        // Get next char
-                        if (charPos < s.length()) {
-                            c = s.charAt(charPos++);
-                        } else {
-                            c = '@';
-                        }
-                    } else {
-                        // c == '@' so the word already exists therefore exit.
-                        exit = true;
-                    }
-                } else {
-                    // trieSymbol[ptr] != c but the next spot is defined
-                    if (trieNext[ptr] != EMPTY) {
-                        ptr = trieNext[ptr];
-                        // next spot is not defined so set it to nextFreeSpot
-                        // and insert what is left of the word.
-                    } else {
-                        trieNext[ptr] = nextFreeSpot;
-                        if (s.length() == 1) {
-                            trieSymbol[nextFreeSpot] = '@';
-                        } else {
-                            create(s.substring(charPos - 1, s.length()), nextFreeSpot);
-                        }
-                        exit = true;
-                    }
-                }
-            }
-        }
-
-        /**
-         * Inserts a string into an empty location in the symbol table.
-         *
-         * @param s - string to be inserted
-         * @param ptr - position where string will be inserted
-         */
-        private void create(String s, int ptr) {
-            for (int i = 0; i < s.length(); i++) {
-                trieSymbol[ptr++] = s.charAt(i);
-            }
-            trieSymbol[ptr++] = '@';
-            nextFreeSpot = ptr;
-        }
-
-        /**
-         * Returns an index number for the switch array in the symbol table.
-         *
-         * @param c - character of first element in the string
-         * @return index corresponding to the character
-         */
-        private int getSwitchIndex(char c) {
-            if (Character.isUpperCase(c)) {
-                return ((int) c) - 65;
-            } else {
-                return ((int) c) - 71;
-            }
-        }
-    }
-
+	
     /**
      *
      * Tokens are implemented using an enum. Each token is assigned a unique
