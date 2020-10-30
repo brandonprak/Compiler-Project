@@ -69,232 +69,36 @@ enum token {
   }
 }
 
-// Max size of Trie Symbol & Next Array
-final int MAX = 1000;
-final int ALPHASIZE = 52;
+Trie<String> symbolTable = new Trie<>(); //String for now, can change later
 
+symbolTable.reserve("boolean");
+symbolTable.reserve("break");
+symbolTable.reserve("class");
+symbolTable.reserve("double");
+symbolTable.reserve("else");
+symbolTable.reserve("extends");
+symbolTable.reserve("false");
+symbolTable.reserve("for");
+symbolTable.reserve("if");
+symbolTable.reserve("implements");
+symbolTable.reserve("int");
+symbolTable.reserve("interface");
+symbolTable.reserve("new");
+symbolTable.reserve("newarray");
+symbolTable.reserve("null");
+symbolTable.reserve("println");
+symbolTable.reserve("readln");
+symbolTable.reserve("return");
+symbolTable.reserve("string");
+symbolTable.reserve("true");
+symbolTable.reserve("void");
+symbolTable.reserve("while");
 
-// Trie Data Structure
-private class Trie {
-
-  private int tSwitch[] = new int[ALPHASIZE];
-  private char tSymbol[] = new char[MAX];
-  private int tNext[] = new int[MAX];
-  private int symbolEnd = 0;
-
-  public Trie() {
-    // Initialize arrays
-    Arrays.fill(tSwitch, -1);
-    Arrays.fill(tSymbol, '-');
-    Arrays.fill(tNext, -1);
-
-    // Insert all reserved words into Trie first
-    insert("boolean", '!');
-    insert("break", '#');
-    insert("class", '$');
-    insert("double", '%');
-    insert("else", '^');
-    insert("extends", '&');
-    insert("false", '>');
-    insert("for", '(');
-    insert("if", ')');
-    insert("implements", '-');
-    insert("int", '+');
-    insert("interface", '=');
-    insert("new", '{');
-    insert("newarray", '}');
-    insert("null", '|');
-    insert("println", '\\');
-    insert("readln", '/');
-    insert("return", '?');
-    insert("string", '*');
-    insert("true", '<');
-    insert("void", '.');
-    insert("while", ',');
-  }
-
-  // Get int representation of characters
-  private int getValOfSymbol(char c) {
-    return (Character.isUpperCase(c)) ? ((int)c - 65) : (((int)c - 97) + 26);
-  }
-  // Gets char representation of int based on above
-  // (anything larger than 51 returns 'z', smaller than 0 returns 'A')
-  private char getSymOfVal(int c) {
-    if(c > 51)
-      return 'z';
-    if(c > 25)
-      return (char)(c + 97 - 26);
-    else if(c < 0)
-      return 'A';
-    else
-      return (char)(c + 65);
-  }
-
-  // Returns true if c is a valid deliminator, false otherwise
-  private boolean isDelim(char c) {
-    if(c == '!' /*boolean*/ || c == '#' /*break*/ || c == '$' /*class*/ || c == '%' /*double*/ || c == '^' /*else*/
-         || c == '&' /*extends*/ || c == '>' /*false*/ || c == '(' /*for*/ || c == ')' /*if*/ || c == '-' /*implements*/
-         || c == '+' /*int*/ || c == '=' /*interface*/ || c == '{' /*new*/ || c == '}' /*newarray*/ || c == '|' /*null*/
-         || c == '\\' /*println*/ || c == '/' /*readln*/ || c == '?' /*return*/ || c == '*' /*string*/ || c == '<' /*true*/
-         || c == '.' /*void*/ || c == ',' /*while*/ || c == '@' /*id*/ )
-      return true;
-    else
-      return false;
-  }
-
-  // Creates an id, s, at index in tSymbol, if wholeWord ignores first character and sets tSwitch
-  private void createId(String s, int size, int index, boolean wholeWord) {
-    int sInd = 0;
-    if(wholeWord){
-      tSwitch[getValOfSymbol(s.charAt(sInd))] = index;
-      sInd++;
-      size--;
-    }
-
-    for(int i = 0; i < size; i++) {
-      tSymbol[index + i] = s.charAt(sInd);
-      sInd++;
-    }
-    // Mark new end of tSymbol
-    symbolEnd = index + size;
-  }
-
-  // Search through Trie and insert string s with deliminator delim if not found
-  // Will return false if no insertion is needed, true if s is inserted into Trie
-  public boolean insert(String s, char delim) {
-    s = s + delim;
-    int sInd = 0;
-    int ptr = tSwitch[getValOfSymbol(s.charAt(sInd))];
-    if(ptr == -1) {
-      createId(s, s.length(), symbolEnd, true);
-      return true; // Successful insertion
-    } else {
-      sInd++;
-      boolean exit = false;
-      while(!exit){
-        if(tSymbol[ptr] == s.charAt(sInd)){
-          if(!isDelim(s.charAt(sInd))){
-            // If sInd isn't at the end of the id check next symbol in tSymbol with next char in s
-            ptr++;
-            sInd++;
-          } else {
-            // If sInd is at the end of id, and it all matched & ends in Trie, id's already present, exit
-            exit = true;
-          }
-        } else if(tNext[ptr] != -1) {
-          // If s.charAt(sInd) doesn't match tSymbol[ptr] check next for where to continue if it's defined
-          ptr = tNext[ptr];
-        } else {
-          // New id
-          tNext[ptr] = symbolEnd;
-          createId(s.substring(sInd, s.length()), s.substring(sInd, s.length()).length(), symbolEnd, false);
-          return true; // Successful insertion
-        }
-      }
-    }
-    return false; // If insertion is not needed
-  }
-
-  public void print() {
-    System.out.println();
-
-    // Print switch
-    boolean labelFlag = true, symFlag;
-    int counter = 0;
-    int rowSize = 20;
-
-    while(counter < ALPHASIZE) {
-      if(counter + 20 > ALPHASIZE) {
-        rowSize = ALPHASIZE - counter;
-      }
-      for(int i = 0; i < rowSize; i++) {
-        // For new lines
-        if((i + counter) % 20 == 0) {
-          if(labelFlag) {
-            System.out.println();
-            System.out.format("%-8s", "");
-          } else {
-            System.out.println();
-            System.out.format("%-8s", "switch:");
-          }
-        }
-
-        if(labelFlag)
-          System.out.format("%5s", getSymOfVal(i + counter));
-        else
-          System.out.format("%5d", tSwitch[i + counter]);
-      }
-      // If the end of a switch[i] row add 20 to the counter and move on to the next actual row
-      if(!labelFlag) {
-        counter = counter + 20;
-        System.out.println();
-      }
-      // Flip labelFlag switch
-      labelFlag = !labelFlag;
-    }
-
-    System.out.println();
-    // Print Symbol and Next
-    // Reset variables for reuse
-    rowSize = 20;
-    counter = 0;
-    labelFlag = true;
-    symFlag  = true;
-
-    while(counter < symbolEnd) {
-      if(counter + 20 > symbolEnd) {
-        rowSize = symbolEnd - counter;
-      }
-      for(int i = 0; i < rowSize; i++) {
-        // For new lines and row header
-        if((i + counter) % 20 == 0) {
-          if(labelFlag) {
-            System.out.println();
-            System.out.format("%-8s", "");
-          } else if(symFlag) {
-            System.out.println();
-            System.out.format("%-8s", "symbol:");
-          } else {
-            System.out.println();
-            System.out.format("%-8s", "next:");
-          }
-        }
-
-        if(labelFlag) {
-          System.out.format("%5s", (i + counter));
-        } else if(symFlag) {
-          System.out.format("%5s", tSymbol[i + counter]);
-        } else {
-          System.out.format("%5d", tNext[i + counter]);
-        }
-      }
-
-      // If at the end of a next[] row, add 20 to the counter and move on to the next actual row
-      if(!labelFlag && !symFlag) {
-        counter = counter + 20;
-        System.out.println();
-      }
-      // End of label row, switch off label flag
-      if(labelFlag) {
-        labelFlag = !labelFlag;
-      // End of symbol row, switch off symbol flag
-      } else if(symFlag) {
-        symFlag = !symFlag;
-      // End of next row, switch on lbl and switch flags
-      } else {
-        labelFlag = !labelFlag;
-        symFlag = !symFlag;
-      }
-    }
-  }
-}
-
-Trie symbolTable = new Trie();
 
 %}
 
 %eof{
-  symbolTable.print();
+  System.out.println(symbolTable);
 %eof}
 
 DIGIT=[0-9]
