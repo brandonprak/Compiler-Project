@@ -81,105 +81,105 @@ public static class Token{
   public String toString() {
 	switch(type){
 		case _BOOLEAN:
-			return "_boolean";
+			return "boolean";
 		case _BREAK:
-			return "_break";
+			return "break";
 		case _CLASS:
-			return "_class";
+			return "class";
 		case _DOUBLE:
-			return "_double";
+			return "double";
 		case _ELSE:
-			return "_else";
+			return "else";
 		case _EXTENDS:
-			return "_extends";
+			return "extends";
 		case _FOR:
-			return "_for";
+			return "for";
 		case _IF:
-			return "_if";
+			return "if";
 		case _IMPLEMENTS:
-			return "_implements";
+			return "implements";
 		case _INT:
-			return "_int";
+			return "int";
 		case _INTERFACE:
-			return "_interface";
+			return "interface";
 		case _NEW:
-			return "_new";
+			return "new";
 		case _NEWARRAY:
-			return "_newarray";
+			return "newarray";
 		case _NULL:
-			return "_null";
+			return "null";
 		case _PRINTLN:
-			return "_println";
+			return "println";
 		case _READLN:
-			return "_readln";
+			return "readln";
 		case _RETURN:
-			return "_return";
+			return "return";
 		case _STRING:
-			return "_string";
+			return "string";
 		case _VOID:
-			return "_void";
+			return "void";
 		case _WHILE:
-			return "_while";
+			return "while";
 		case _PLUS:
-			return "_plus";
+			return "plus";
 		case _MINUS:
-			return "_minus";
+			return "minus";
 		case _MULTIPLICATION:
-			return "_multiplication";
+			return "multiplication";
 		case _DIVISION:
-			return "_division";
+			return "division";
 		case _MOD:
-			return "_mod";
+			return "mod";
 		case _LESS:
-			return "_less";
+			return "less";
 		case _LESSEQUAL:
-			return "_lessequal";
+			return "lessequal";
 		case _GREATER:
-			return "_greater";
+			return "greater";
 		case _GREATEREQUAL:
-			return "_greaterequal";
+			return "greaterequal";
 		case _EQUAL:
-			return "_equal";
+			return "equal";
 		case _NOTEQUAL:
-			return "_notequal";
+			return "notequal";
 		case _AND:
-			return "_and";
+			return "and";
 		case _OR:
-			return "_or";
+			return "or";
 		case _NOT:
-			return "_not";
+			return "not";
 		case _ASSIGNOP:
-			return "_assignop";
+			return "assignop";
 		case _SEMICOLON:
-			return "_semicolon";
+			return "semicolon";
 		case _COMMA:
-			return "_comma";
+			return "comma";
 		case _PERIOD:
-			return "_period";
+			return "period";
 		case _LEFTPAREN:
-			return "_leftparen";
+			return "leftparen";
 		case _RIGHPAREN:
-			return "_righparen";
+			return "righparen";
 		case _LEFTBRACKET:
-			return "_leftbracket";
+			return "leftbracket";
 		case _RIGHTBRACKET:
-			return "_rightbracket";
+			return "rightbracket";
 		case _LEFTBRACE:
-			return "_leftbrace";
+			return "leftbrace";
 		case _RIGHTBRACE:
-			return "_rightbrace";
+			return "rightbrace";
 		case _INTCONSTANT:
-			return "_intconstant";
+			return "intconstant";
 		case _DOUBLECONSTANT:
-			return "_doubleconstant";
+			return "doubleconstant";
 		case _STRINGCONSTANT:
-			return "_stringconstant";
+			return "stringconstant";
 		case _BOOLEANCONSTANT:
-			return "_booleanconstant";
+			return "booleanconstant";
 		case _ID:
-			return "_id";
+			return "id";
 		default:
-			return "__unknown";
+			return "unknown";
 
 	}
   }
