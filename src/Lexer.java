@@ -1177,7 +1177,7 @@ public boolean errorOccurred(){
             // fall through
           case 96: break;
           case 36:
-            { char c = (char)Integer.parseInt(yytext().substring(1), 8).intValue();
+            { char c = (char)Integer.parseInt(yytext().substring(1), 8);
 									 sLiteral.append(c);
             }
             // fall through
