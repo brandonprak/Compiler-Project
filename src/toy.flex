@@ -249,7 +249,7 @@ WS= {NL}|[" "\t\f]
 DECLITERAL={DIGIT}+
 HEXLITERAL=0[xX]{HEX}+
 
-DBLLITERAL={DIGIT}+"."({DIGIT}*|((E|e)("+"|"-")?{DIGIT}+))
+DBLLITERAL={DIGIT}+"."({DIGIT}*((E|e)("+"|"-")?{DIGIT}+)?)
 
 IDENT=[A-Za-z_][0-9A-Za-z_]*
 
