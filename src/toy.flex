@@ -247,7 +247,7 @@ NL=\r|\n|\r\n
 WS= {NL}|[" "\t\f]
 
 DECLITERAL={DIGIT}+
-HEXLITERAL=0x{HEX}+
+HEXLITERAL=0[xX]{HEX}+
 
 DBLLITERAL={DIGIT}+"."({DIGIT}*|((E|e)("+"|"-")?{DIGIT}+))
 
