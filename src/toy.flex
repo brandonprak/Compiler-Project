@@ -242,11 +242,9 @@ public boolean errorOccurred(){
 %eof}
 
 DIGIT=[0-9]
-LETTER=[A-Za-z]
 HEX=[0-9]|[A-Fa-f]
 NL=\r|\n|\r\n
 WS= {NL}|[" "\t\f]
-SL=[^\r\n\"] //String Literal characters
 
 DECLITERAL={DIGIT}+
 HEXLITERAL=0x{HEX}+
