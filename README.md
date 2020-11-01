@@ -1,4 +1,6 @@
 # Project 1: Lexical Analyzer
+Group Members: Brandon Prak, Riley Kuttruff, Adam Do
+
 Software Versions:  
 - JDK - 11.0.8  
 - JFlex - 1.8.2
