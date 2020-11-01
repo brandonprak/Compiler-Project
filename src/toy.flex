@@ -340,7 +340,7 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 									 yybegin(YYINITIAL);
 									 return Token.build(Token._STRINGCONSTANT, s, currentLine);}
 	
-	[^\n\r\"\\]+			{sLiteral.append(yytext());}	/*not sure about this regex*/
+	[^\n\r\"\\]+					{sLiteral.append(yytext());}	/*not sure about this regex*/
 	
 	\\n								{sLiteral.append('\n');}
 	\\r								{sLiteral.append('\r');}
@@ -348,7 +348,7 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 	\\								{sLiteral.append('\\');}
 	\\\"							{sLiteral.append('\"');}
 	
-	{OCTESCAPE}						{char c = (char)Integer.parseInt(yytext().substring(1), 8).intValue();
+	{OCTESCAPE}						{char c = (char)Integer.parseInt(yytext().substring(1), 8);
 									 sLiteral.append(c);}
 }
 

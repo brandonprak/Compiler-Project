@@ -31,8 +31,9 @@ public class Main{
 		
 		while(!(lex.isDone() || lex.errorOccurred())){
 			try{
-				tokens.add(lex.yylex());
-				System.err.println(lex.yytext());
+				Lexer.Token t = lex.yylex();
+				if(!(t == null && lex.isDone()))
+					tokens.add(t);
 			}
 			catch(IOException e){
 				System.out.println("An IOException occurred:");
