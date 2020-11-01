@@ -1,4 +1,4 @@
-# Project 1 Lexical Analyzer
+# Project 1: Lexical Analyzer
 Software Versions:  
 - JDK - 11.0.8  
 - JFlex - 1.8.2
