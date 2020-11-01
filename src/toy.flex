@@ -2,7 +2,7 @@ import java.util.*;
 
 %%
 %class Lexer
-%type "Token"
+%type Token
 %eofclose
 
 %{
