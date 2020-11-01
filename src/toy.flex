@@ -315,10 +315,6 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 
 	{NL}							{currentLine++;}
 
-	{WS}							{}
-
-	{COMMENT}						{}
-
 	{IDENT}							{String s = yytext();
 									 symbolTable.reserve(s);
 									 return Token.build(Token._ID, s, currentLine);}
@@ -332,6 +328,9 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 	{DBLLITERAL}					{return Token.build(Token._DOUBLECONSTANT, yytext(), currentLine);}
 	
 	\"								{yybegin(STRINGLITERAL);}
+	
+	{COMMENT}						{}
+	{WS}							{}
 }
 
 <STRINGLITERAL> {
