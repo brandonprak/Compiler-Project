@@ -1,0 +1,74 @@
+int id leftparen int id righparen leftbrace
+if leftparen id greater intconstant righparen return id multiplication id leftparen id minus intconstant righparen semicolon
+else return intconstant semicolon
+rightbrace
+void id leftparen righparen leftbrace
+int id semicolon
+int id semicolon
+println leftparen stringconstant comma id leftparen intconstant righparen comma stringconstant righparen semicolon
+id equal intconstant semicolon id equal intconstant semicolon
+for leftparen semicolon id lessequal intconstant semicolon righparen leftbrace id equal id multiplication id semicolon id equal id plus intconstant semicolon rightbrace
+println leftparen stringconstant comma id righparen semicolon
+rightbrace
+class id leftbrace
+int id semicolon
+double id semicolon
+boolean id semicolon
+string id semicolon
+int leftbracket rightbracket id semicolon
+id equal booleanconstant semicolon
+id equal intconstant semicolon id equal intconstant id plus intconstant semicolon
+id equal stringconstant semicolon
+while leftparen id equal leftparen id division intconstant righparen less intconstant righparen println leftparen id comma stringconstant righparen semicolon
+id equal newarray leftparen intconstant comma int righparen semicolon
+rightbrace
+
+         A  B   C  D   E   F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V
+switch: -1 -1 153 -1 181 160 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+
+         W  X  Y  Z   a b  c  d  e  f  g  h  i  j  k  l   m  n  o  p  q   r
+switch: -1 -1 -1 -1 179 0 14 20 27 40 -1 -1 50 -1 -1 -1 142 76 -1 92 -1 100
+
+          s   t  u   v   w   x  y  z
+switch: 113 120 -1 125 130 140 -1 -1
+
+        0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+symbol: o o l e a n * # r e  a  k  *  #  l  a  s  s  *  #  o  u  b  l  e  *
+next:   8             0               1                 2                  
+
+        26 27 28 29 30 31 32 33 34 35 36 37 38 39 40  41 42 43 44 45  46 47
+symbol:  #  l  s  e  *  #  x  t  e  n  d  s  *  #  a   l  s  e  *  #   o  r
+next:    3 32           4                       5 46 136           6 166   
+
+        48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
+symbol:  *  #  f  *  #  m  p  l  e  m  e  n  t  s  *  #  n  t  *  #  e  r  f
+next:       7 53     8 64                             9       68 10         
+
+        71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93
+symbol:  a  c  e  *  #  e  w  *  #  a  r  r  a  y  *  #  u  l  l  *  #  r  i
+next:               11 87    80 12                   13             14      
+
+        94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112
+symbol:  n  t  l  n  *  #   e   a   d   l   n   *   #   t   u   r   n   *   #
+next:                  15     107                  16                      17
+
+        113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129
+symbol:   t   r   i   n   g   *   #   r   u   e   *   #   o   i   d   *   #
+next:   177                      18 147              19                  20
+
+        130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146
+symbol:   h   i   l   e   *   #   c   t   *   #   *   #   a   i   n   *   #
+next:                        21              22      23                  24
+
+        147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163
+symbol:   o   t   a   l   *   #   S   4   1   1   0   *   #   u   n   n   y
+next:                        25                          26                
+
+        164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180
+symbol:   *   #   u   n   n   y   *   #   l   a   g   *   #   *   #   *   #
+next:        27 172                  28                  29      30      31
+
+        181 182
+symbol:   *   #
+next:        32
+
