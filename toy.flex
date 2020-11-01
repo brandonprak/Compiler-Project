@@ -71,7 +71,7 @@ public static class Token{
 	}
 	
 	public static Token build(final int type, final int line){
-		return build(type, "", line);
+		return build(type, null, line);
 	}
 
 	public String getValue() {
