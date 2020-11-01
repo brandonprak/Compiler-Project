@@ -2,6 +2,8 @@ import java.util.*;
 
 %%
 %class Lexer
+%type "Token"
+%eofclose
 
 %{
 // Class for tokens
@@ -45,7 +47,7 @@ public static class Token{
 	public static final int _COMMA = 36;
 	public static final int _PERIOD = 37;
 	public static final int _LEFTPAREN = 38;
-	public static final int _RIGHPAREN = 39;
+	public static final int _RIGHTPAREN = 39;
 	public static final int _LEFTBRACKET = 40;
 	public static final int _RIGHTBRACKET = 41;
 	public static final int _LEFTBRACE = 42;
