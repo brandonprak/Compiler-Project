@@ -4,6 +4,7 @@ import java.util.*;
 %class Lexer
 %type Token
 %eofclose
+%public
 
 %{
 // Class for tokens
