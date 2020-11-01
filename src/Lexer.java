@@ -475,7 +475,7 @@ public static class Token{
 	}
 	
 	public static Token build(final int type, final String value, final int line) {
-		final Token token = new Token(tokenid, value, line);
+		final Token token = new Token(type, value, line);
 		return token;
 	}
 	
@@ -567,7 +567,7 @@ public static class Token{
 				return "period";
 			case _LEFTPAREN:
 				return "leftparen";
-			case _RIGHPAREN:
+			case _RIGHTPAREN:
 				return "righparen";
 			case _LEFTBRACKET:
 				return "leftbracket";
