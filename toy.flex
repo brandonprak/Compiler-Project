@@ -55,6 +55,7 @@ public static class Token{
 	public static final int _STRINGCONSTANT = 46;
 	public static final int _BOOLEANCONSTANT = 47;
 	public static final int _ID = 48;
+	public static final int _ERROR = -1;
 
 	private final int type, line;
 	private final String value;
@@ -178,6 +179,8 @@ public static class Token{
 				return "booleanconstant";
 			case _ID:
 				return "id";
+			case _ERROR:
+				return "error";
 			default:
 				return "unknown";
 		}
@@ -344,4 +347,5 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 									 sLiteral.append(c);}
 }
 
-[^]									{error = true;}
+[^]									{error = true;
+									 return Token.build(Token._ERROR, yytext(), currentLine);}
