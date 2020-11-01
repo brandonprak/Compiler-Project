@@ -81,6 +81,10 @@ public static class Token{
 	public String getValue() {
 		return value;
 	}
+	
+	public int getLineNumber(){
+		return line;
+	}
 
 	public String toString() {
 		switch(type){
