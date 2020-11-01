@@ -486,6 +486,10 @@ public static class Token{
 	public String getValue() {
 		return value;
 	}
+	
+	public int getLineNumber(){
+		return line;
+	}
 
 	public String toString() {
 		switch(type){
@@ -618,7 +622,7 @@ public boolean errorOccurred(){
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  Lexer(java.io.Reader in) {
+  public Lexer(java.io.Reader in) {
   	symbolTable.reserve("boolean");
 	symbolTable.reserve("break");
 	symbolTable.reserve("class");
