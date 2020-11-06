@@ -251,7 +251,7 @@ HEXLITERAL=0[xX]{HEX}+
 
 DBLLITERAL={DIGIT}+"."({DIGIT}*((E|e)("+"|"-")?{DIGIT}+)?)
 
-IDENT=[A-Za-z_][0-9A-Za-z_]*
+IDENT=[A-Za-z][0-9A-Za-z_]*
 
 OCTAL=[0-7]
 OCTESCAPE=\\({OCTAL}|{OCTAL}{OCTAL}|[0-3]{OCTAL}{OCTAL})
