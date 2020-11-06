@@ -167,7 +167,7 @@ public static class Token{
 			case _LEFTPAREN:
 				return "leftparen";
 			case _RIGHTPAREN:
-				return "righparen";
+				return "rightparen";
 			case _LEFTBRACKET:
 				return "leftbracket";
 			case _RIGHTBRACKET:
@@ -254,7 +254,7 @@ DBLLITERAL={DIGIT}+"."({DIGIT}*((E|e)("+"|"-")?{DIGIT}+)?)
 IDENT=[A-Za-z][0-9A-Za-z_]*
 
 OCTAL=[0-7]
-OCTESCAPE=\\({OCTAL}|{OCTAL}{OCTAL}|[0-3]{OCTAL}{OCTAL})
+OCTESCAPE=\\[0-3]?{OCTAL}?{OCTAL}
 
 SLCOMMENT="//".*
 MLCOMMENT="/*" ~"*/"

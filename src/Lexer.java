@@ -579,7 +579,7 @@ public static class Token{
 			case _LEFTPAREN:
 				return "leftparen";
 			case _RIGHTPAREN:
-				return "righparen";
+				return "rightparen";
 			case _LEFTBRACKET:
 				return "leftbracket";
 			case _RIGHTBRACKET:
