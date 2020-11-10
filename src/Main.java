@@ -1,7 +1,11 @@
 import java.util.*;
 import java.io.*;
 
-//import static Lexer.Token;
+import common.*;
+import lexer.*;
+import parser.*;
+
+import static lexer.Lexer.Token;
 
 public class Main{
 	
@@ -27,11 +31,11 @@ public class Main{
 		
 		Lexer lex = new Lexer(r);
 		
-		List<Lexer.Token> tokens = new ArrayList<>();
+		List<Token> tokens = new ArrayList<>();
 		
 		while(!(lex.isDone() || lex.errorOccurred())){
 			try{
-				Lexer.Token t = lex.yylex();
+				Token t = lex.yylex();
 				if(!(t == null && lex.isDone()))
 					tokens.add(t);
 			}
@@ -43,9 +47,9 @@ public class Main{
 			}
 		}
 		
-		Iterator<Lexer.Token> itr = tokens.iterator();
+		Iterator<Token> itr = tokens.iterator();
 		
-		Lexer.Token t = null;
+		Token t = null;
 		int line = 0;
 		
 		if(itr.hasNext()){

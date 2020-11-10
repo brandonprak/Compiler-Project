@@ -1,4 +1,8 @@
+package lexer;
+
 import java.util.*;
+
+import common.*;
 
 %%
 %class Lexer
