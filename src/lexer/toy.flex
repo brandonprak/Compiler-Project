@@ -9,61 +9,11 @@ import common.*;
 %type Token
 %eofclose
 %public
+%implements TokenTypeID
 
 %{
 // Class for tokens
 public static class Token{
-	public static final int _BOOLEAN = 0;
-	public static final int _BREAK = 1;
-	public static final int _CLASS = 2;
-	public static final int _DOUBLE = 3;
-	public static final int _ELSE = 4;
-	public static final int _EXTENDS = 5;
-	public static final int _FOR = 6;
-	public static final int _IF = 7;
-	public static final int _IMPLEMENTS = 8;
-	public static final int _INT = 9;
-	public static final int _INTERFACE = 10;
-	public static final int _NEW = 11;
-	public static final int _NEWARRAY = 12;
-	public static final int _NULL = 13;
-	public static final int _PRINTLN = 14;
-	public static final int _READLN = 15;
-	public static final int _RETURN = 16;
-	public static final int _STRING = 17;
-	public static final int _VOID = 18;
-	public static final int _WHILE = 19;
-	public static final int _PLUS = 20;
-	public static final int _MINUS = 21;
-	public static final int _MULTIPLICATION = 22;
-	public static final int _DIVISION = 23;
-	public static final int _MOD = 24;
-	public static final int _LESS = 25;
-	public static final int _LESSEQUAL = 26;
-	public static final int _GREATER = 27;
-	public static final int _GREATEREQUAL = 28;
-	public static final int _EQUAL = 29;
-	public static final int _NOTEQUAL = 30;
-	public static final int _AND = 31;
-	public static final int _OR = 32;
-	public static final int _NOT = 33;
-	public static final int _ASSIGNOP = 34;
-	public static final int _SEMICOLON = 35;
-	public static final int _COMMA = 36;
-	public static final int _PERIOD = 37;
-	public static final int _LEFTPAREN = 38;
-	public static final int _RIGHTPAREN = 39;
-	public static final int _LEFTBRACKET = 40;
-	public static final int _RIGHTBRACKET = 41;
-	public static final int _LEFTBRACE = 42;
-	public static final int _RIGHTBRACE = 43;
-	public static final int _INTCONSTANT = 44;
-	public static final int _DOUBLECONSTANT = 45;
-	public static final int _STRINGCONSTANT = 46;
-	public static final int _BOOLEANCONSTANT = 47;
-	public static final int _ID = 48;
-	public static final int _ERROR = -1;
-
 	private final int type, line;
 	private final String value;
 
@@ -270,66 +220,66 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 %%
 
 <YYINITIAL> {
-	"boolean"						{return Token.build(Token._BOOLEAN, currentLine);}
-	"break"							{return Token.build(Token._BREAK, currentLine);}
-	"class"							{return Token.build(Token._CLASS, currentLine);}
-	"double"						{return Token.build(Token._DOUBLE, currentLine);}
-	"else"							{return Token.build(Token._ELSE, currentLine);}
-	"extends"						{return Token.build(Token._EXTENDS, currentLine);}
-	"false"							{return Token.build(Token._BOOLEANCONSTANT, "false", currentLine);}
-	"for"							{return Token.build(Token._FOR, currentLine);}
-	"if"							{return Token.build(Token._IF, currentLine);}
-	"implements"					{return Token.build(Token._IMPLEMENTS, currentLine);}
-	"int"							{return Token.build(Token._INT, currentLine);}
-	"interface"						{return Token.build(Token._INTERFACE, currentLine);}
-	"new"							{return Token.build(Token._NEW, currentLine);}
-	"newarray"						{return Token.build(Token._NEWARRAY, currentLine);}
-	"null"							{return Token.build(Token._NULL, currentLine);}
-	"println"						{return Token.build(Token._PRINTLN, currentLine);}
-	"readln"						{return Token.build(Token._READLN, currentLine);}
-	"return"						{return Token.build(Token._RETURN, currentLine);}
-	"string"						{return Token.build(Token._STRING, currentLine);}
-	"true"							{return Token.build(Token._BOOLEANCONSTANT, "true", currentLine);}
-	"void"							{return Token.build(Token._VOID, currentLine);}
-	"while"							{return Token.build(Token._WHILE, currentLine);}
-	"+"								{return Token.build(Token._PLUS, currentLine);}
-	"-"								{return Token.build(Token._MINUS, currentLine);}
-	"*"								{return Token.build(Token._MULTIPLICATION, currentLine);}
-	"/"								{return Token.build(Token._DIVISION, currentLine);}
-	"%"								{return Token.build(Token._MOD, currentLine);}
-	"<"								{return Token.build(Token._LESS, currentLine);}
-	"<="							{return Token.build(Token._LESSEQUAL, currentLine);}
-	">"								{return Token.build(Token._GREATER, currentLine);}
-	">="							{return Token.build(Token._GREATEREQUAL, currentLine);}
-	"=="							{return Token.build(Token._EQUAL, currentLine);}
-	"!="							{return Token.build(Token._NOTEQUAL, currentLine);}
-	"&&"							{return Token.build(Token._AND, currentLine);}
-	"||"							{return Token.build(Token._OR, currentLine);}
-	"!"								{return Token.build(Token._NOT, currentLine);}
-	"="								{return Token.build(Token._EQUAL, currentLine);}
-	";"								{return Token.build(Token._SEMICOLON, currentLine);}
-	","								{return Token.build(Token._COMMA, currentLine);}
-	"."								{return Token.build(Token._PERIOD, currentLine);}
-	"("								{return Token.build(Token._LEFTPAREN, currentLine);}
-	")"								{return Token.build(Token._RIGHTPAREN, currentLine);}
-	"["								{return Token.build(Token._LEFTBRACKET, currentLine);}
-	"]"								{return Token.build(Token._RIGHTBRACKET, currentLine);}
-	"{"								{return Token.build(Token._LEFTBRACE, currentLine);}
-	"}"								{return Token.build(Token._RIGHTBRACE, currentLine);}
+	"boolean"						{return Token.build(_BOOLEAN, currentLine);}
+	"break"							{return Token.build(_BREAK, currentLine);}
+	"class"							{return Token.build(_CLASS, currentLine);}
+	"double"						{return Token.build(_DOUBLE, currentLine);}
+	"else"							{return Token.build(_ELSE, currentLine);}
+	"extends"						{return Token.build(_EXTENDS, currentLine);}
+	"false"							{return Token.build(_BOOLEANCONSTANT, "false", currentLine);}
+	"for"							{return Token.build(_FOR, currentLine);}
+	"if"							{return Token.build(_IF, currentLine);}
+	"implements"					{return Token.build(_IMPLEMENTS, currentLine);}
+	"int"							{return Token.build(_INT, currentLine);}
+	"interface"						{return Token.build(_INTERFACE, currentLine);}
+	"new"							{return Token.build(_NEW, currentLine);}
+	"newarray"						{return Token.build(_NEWARRAY, currentLine);}
+	"null"							{return Token.build(_NULL, currentLine);}
+	"println"						{return Token.build(_PRINTLN, currentLine);}
+	"readln"						{return Token.build(_READLN, currentLine);}
+	"return"						{return Token.build(_RETURN, currentLine);}
+	"string"						{return Token.build(_STRING, currentLine);}
+	"true"							{return Token.build(_BOOLEANCONSTANT, "true", currentLine);}
+	"void"							{return Token.build(_VOID, currentLine);}
+	"while"							{return Token.build(_WHILE, currentLine);}
+	"+"								{return Token.build(_PLUS, currentLine);}
+	"-"								{return Token.build(_MINUS, currentLine);}
+	"*"								{return Token.build(_MULTIPLICATION, currentLine);}
+	"/"								{return Token.build(_DIVISION, currentLine);}
+	"%"								{return Token.build(_MOD, currentLine);}
+	"<"								{return Token.build(_LESS, currentLine);}
+	"<="							{return Token.build(_LESSEQUAL, currentLine);}
+	">"								{return Token.build(_GREATER, currentLine);}
+	">="							{return Token.build(_GREATEREQUAL, currentLine);}
+	"=="							{return Token.build(_EQUAL, currentLine);}
+	"!="							{return Token.build(_NOTEQUAL, currentLine);}
+	"&&"							{return Token.build(_AND, currentLine);}
+	"||"							{return Token.build(_OR, currentLine);}
+	"!"								{return Token.build(_NOT, currentLine);}
+	"="								{return Token.build(_EQUAL, currentLine);}
+	";"								{return Token.build(_SEMICOLON, currentLine);}
+	","								{return Token.build(_COMMA, currentLine);}
+	"."								{return Token.build(_PERIOD, currentLine);}
+	"("								{return Token.build(_LEFTPAREN, currentLine);}
+	")"								{return Token.build(_RIGHTPAREN, currentLine);}
+	"["								{return Token.build(_LEFTBRACKET, currentLine);}
+	"]"								{return Token.build(_RIGHTBRACKET, currentLine);}
+	"{"								{return Token.build(_LEFTBRACE, currentLine);}
+	"}"								{return Token.build(_RIGHTBRACE, currentLine);}
 
 	{NL}							{currentLine++;}
 
 	{IDENT}							{String s = yytext();
 									 symbolTable.reserve(s);
-									 return Token.build(Token._ID, s, currentLine);}
+									 return Token.build(_ID, s, currentLine);}
 
-	{DECLITERAL}					{return Token.build(Token._INTCONSTANT, yytext(), currentLine);}
+	{DECLITERAL}					{return Token.build(_INTCONSTANT, yytext(), currentLine);}
 
 	{HEXLITERAL}					{String s = yytext();
 									 s = Integer.decode(s).toString();
-									 return Token.build(Token._INTCONSTANT, s, currentLine);}
+									 return Token.build(_INTCONSTANT, s, currentLine);}
 
-	{DBLLITERAL}					{return Token.build(Token._DOUBLECONSTANT, yytext(), currentLine);}
+	{DBLLITERAL}					{return Token.build(_DOUBLECONSTANT, yytext(), currentLine);}
 	
 	\"								{yybegin(STRINGLITERAL);}
 	
@@ -341,7 +291,7 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 	\"								{String s = sLiteral.toString();
 									 sLiteral = new StringBuilder();
 									 yybegin(YYINITIAL);
-									 return Token.build(Token._STRINGCONSTANT, s, currentLine);}
+									 return Token.build(_STRINGCONSTANT, s, currentLine);}
 	
 	[^\n\r\"\\]+					{sLiteral.append(yytext());}	/*not sure about this regex*/
 	
@@ -356,4 +306,4 @@ COMMENT={SLCOMMENT}|{MLCOMMENT}
 }
 
 [^]									{error = true;
-									 return Token.build(Token._ERROR, yytext(), currentLine);}
+									 return Token.build(_ERROR, yytext(), currentLine);}

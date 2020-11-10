@@ -11,7 +11,7 @@ import common.*;
 
 // See https://github.com/jflex-de/jflex/issues/222
 @SuppressWarnings("FallThrough")
-public class Lexer {
+public class Lexer implements TokenTypeID {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -425,57 +425,6 @@ public class Lexer {
   /* user code: */
 // Class for tokens
 public static class Token{
-	public static final int _BOOLEAN = 0;
-	public static final int _BREAK = 1;
-	public static final int _CLASS = 2;
-	public static final int _DOUBLE = 3;
-	public static final int _ELSE = 4;
-	public static final int _EXTENDS = 5;
-	public static final int _FOR = 6;
-	public static final int _IF = 7;
-	public static final int _IMPLEMENTS = 8;
-	public static final int _INT = 9;
-	public static final int _INTERFACE = 10;
-	public static final int _NEW = 11;
-	public static final int _NEWARRAY = 12;
-	public static final int _NULL = 13;
-	public static final int _PRINTLN = 14;
-	public static final int _READLN = 15;
-	public static final int _RETURN = 16;
-	public static final int _STRING = 17;
-	public static final int _VOID = 18;
-	public static final int _WHILE = 19;
-	public static final int _PLUS = 20;
-	public static final int _MINUS = 21;
-	public static final int _MULTIPLICATION = 22;
-	public static final int _DIVISION = 23;
-	public static final int _MOD = 24;
-	public static final int _LESS = 25;
-	public static final int _LESSEQUAL = 26;
-	public static final int _GREATER = 27;
-	public static final int _GREATEREQUAL = 28;
-	public static final int _EQUAL = 29;
-	public static final int _NOTEQUAL = 30;
-	public static final int _AND = 31;
-	public static final int _OR = 32;
-	public static final int _NOT = 33;
-	public static final int _ASSIGNOP = 34;
-	public static final int _SEMICOLON = 35;
-	public static final int _COMMA = 36;
-	public static final int _PERIOD = 37;
-	public static final int _LEFTPAREN = 38;
-	public static final int _RIGHTPAREN = 39;
-	public static final int _LEFTBRACKET = 40;
-	public static final int _RIGHTBRACKET = 41;
-	public static final int _LEFTBRACE = 42;
-	public static final int _RIGHTBRACE = 43;
-	public static final int _INTCONSTANT = 44;
-	public static final int _DOUBLECONSTANT = 45;
-	public static final int _STRINGCONSTANT = 46;
-	public static final int _BOOLEANCONSTANT = 47;
-	public static final int _ID = 48;
-	public static final int _ERROR = -1;
-
 	private final int type, line;
 	private final String value;
 
@@ -1001,7 +950,7 @@ public boolean errorOccurred(){
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             { error = true;
-									 return Token.build(Token._ERROR, yytext(), currentLine);
+									 return Token.build(_ERROR, yytext(), currentLine);
             }
             // fall through
           case 62: break;
@@ -1016,7 +965,7 @@ public boolean errorOccurred(){
             // fall through
           case 64: break;
           case 4:
-            { return Token.build(Token._NOT, currentLine);
+            { return Token.build(_NOT, currentLine);
             }
             // fall through
           case 65: break;
@@ -1026,99 +975,99 @@ public boolean errorOccurred(){
             // fall through
           case 66: break;
           case 6:
-            { return Token.build(Token._MOD, currentLine);
+            { return Token.build(_MOD, currentLine);
             }
             // fall through
           case 67: break;
           case 7:
-            { return Token.build(Token._LEFTPAREN, currentLine);
+            { return Token.build(_LEFTPAREN, currentLine);
             }
             // fall through
           case 68: break;
           case 8:
-            { return Token.build(Token._RIGHTPAREN, currentLine);
+            { return Token.build(_RIGHTPAREN, currentLine);
             }
             // fall through
           case 69: break;
           case 9:
-            { return Token.build(Token._MULTIPLICATION, currentLine);
+            { return Token.build(_MULTIPLICATION, currentLine);
             }
             // fall through
           case 70: break;
           case 10:
-            { return Token.build(Token._PLUS, currentLine);
+            { return Token.build(_PLUS, currentLine);
             }
             // fall through
           case 71: break;
           case 11:
-            { return Token.build(Token._COMMA, currentLine);
+            { return Token.build(_COMMA, currentLine);
             }
             // fall through
           case 72: break;
           case 12:
-            { return Token.build(Token._MINUS, currentLine);
+            { return Token.build(_MINUS, currentLine);
             }
             // fall through
           case 73: break;
           case 13:
-            { return Token.build(Token._PERIOD, currentLine);
+            { return Token.build(_PERIOD, currentLine);
             }
             // fall through
           case 74: break;
           case 14:
-            { return Token.build(Token._DIVISION, currentLine);
+            { return Token.build(_DIVISION, currentLine);
             }
             // fall through
           case 75: break;
           case 15:
-            { return Token.build(Token._INTCONSTANT, yytext(), currentLine);
+            { return Token.build(_INTCONSTANT, yytext(), currentLine);
             }
             // fall through
           case 76: break;
           case 16:
-            { return Token.build(Token._SEMICOLON, currentLine);
+            { return Token.build(_SEMICOLON, currentLine);
             }
             // fall through
           case 77: break;
           case 17:
-            { return Token.build(Token._LESS, currentLine);
+            { return Token.build(_LESS, currentLine);
             }
             // fall through
           case 78: break;
           case 18:
-            { return Token.build(Token._EQUAL, currentLine);
+            { return Token.build(_EQUAL, currentLine);
             }
             // fall through
           case 79: break;
           case 19:
-            { return Token.build(Token._GREATER, currentLine);
+            { return Token.build(_GREATER, currentLine);
             }
             // fall through
           case 80: break;
           case 20:
             { String s = yytext();
 									 symbolTable.reserve(s);
-									 return Token.build(Token._ID, s, currentLine);
+									 return Token.build(_ID, s, currentLine);
             }
             // fall through
           case 81: break;
           case 21:
-            { return Token.build(Token._LEFTBRACKET, currentLine);
+            { return Token.build(_LEFTBRACKET, currentLine);
             }
             // fall through
           case 82: break;
           case 22:
-            { return Token.build(Token._RIGHTBRACKET, currentLine);
+            { return Token.build(_RIGHTBRACKET, currentLine);
             }
             // fall through
           case 83: break;
           case 23:
-            { return Token.build(Token._LEFTBRACE, currentLine);
+            { return Token.build(_LEFTBRACE, currentLine);
             }
             // fall through
           case 84: break;
           case 24:
-            { return Token.build(Token._RIGHTBRACE, currentLine);
+            { return Token.build(_RIGHTBRACE, currentLine);
             }
             // fall through
           case 85: break;
@@ -1131,7 +1080,7 @@ public boolean errorOccurred(){
             { String s = sLiteral.toString();
 									 sLiteral = new StringBuilder();
 									 yybegin(YYINITIAL);
-									 return Token.build(Token._STRINGCONSTANT, s, currentLine);
+									 return Token.build(_STRINGCONSTANT, s, currentLine);
             }
             // fall through
           case 87: break;
@@ -1141,37 +1090,37 @@ public boolean errorOccurred(){
             // fall through
           case 88: break;
           case 28:
-            { return Token.build(Token._NOTEQUAL, currentLine);
+            { return Token.build(_NOTEQUAL, currentLine);
             }
             // fall through
           case 89: break;
           case 29:
-            { return Token.build(Token._AND, currentLine);
+            { return Token.build(_AND, currentLine);
             }
             // fall through
           case 90: break;
           case 30:
-            { return Token.build(Token._DOUBLECONSTANT, yytext(), currentLine);
+            { return Token.build(_DOUBLECONSTANT, yytext(), currentLine);
             }
             // fall through
           case 91: break;
           case 31:
-            { return Token.build(Token._LESSEQUAL, currentLine);
+            { return Token.build(_LESSEQUAL, currentLine);
             }
             // fall through
           case 92: break;
           case 32:
-            { return Token.build(Token._GREATEREQUAL, currentLine);
+            { return Token.build(_GREATEREQUAL, currentLine);
             }
             // fall through
           case 93: break;
           case 33:
-            { return Token.build(Token._IF, currentLine);
+            { return Token.build(_IF, currentLine);
             }
             // fall through
           case 94: break;
           case 34:
-            { return Token.build(Token._OR, currentLine);
+            { return Token.build(_OR, currentLine);
             }
             // fall through
           case 95: break;
@@ -1204,112 +1153,112 @@ public boolean errorOccurred(){
           case 40:
             { String s = yytext();
 									 s = Integer.decode(s).toString();
-									 return Token.build(Token._INTCONSTANT, s, currentLine);
+									 return Token.build(_INTCONSTANT, s, currentLine);
             }
             // fall through
           case 101: break;
           case 41:
-            { return Token.build(Token._FOR, currentLine);
+            { return Token.build(_FOR, currentLine);
             }
             // fall through
           case 102: break;
           case 42:
-            { return Token.build(Token._INT, currentLine);
+            { return Token.build(_INT, currentLine);
             }
             // fall through
           case 103: break;
           case 43:
-            { return Token.build(Token._NEW, currentLine);
+            { return Token.build(_NEW, currentLine);
             }
             // fall through
           case 104: break;
           case 44:
-            { return Token.build(Token._ELSE, currentLine);
+            { return Token.build(_ELSE, currentLine);
             }
             // fall through
           case 105: break;
           case 45:
-            { return Token.build(Token._NULL, currentLine);
+            { return Token.build(_NULL, currentLine);
             }
             // fall through
           case 106: break;
           case 46:
-            { return Token.build(Token._BOOLEANCONSTANT, "true", currentLine);
+            { return Token.build(_BOOLEANCONSTANT, "true", currentLine);
             }
             // fall through
           case 107: break;
           case 47:
-            { return Token.build(Token._VOID, currentLine);
+            { return Token.build(_VOID, currentLine);
             }
             // fall through
           case 108: break;
           case 48:
-            { return Token.build(Token._BREAK, currentLine);
+            { return Token.build(_BREAK, currentLine);
             }
             // fall through
           case 109: break;
           case 49:
-            { return Token.build(Token._CLASS, currentLine);
+            { return Token.build(_CLASS, currentLine);
             }
             // fall through
           case 110: break;
           case 50:
-            { return Token.build(Token._BOOLEANCONSTANT, "false", currentLine);
+            { return Token.build(_BOOLEANCONSTANT, "false", currentLine);
             }
             // fall through
           case 111: break;
           case 51:
-            { return Token.build(Token._WHILE, currentLine);
+            { return Token.build(_WHILE, currentLine);
             }
             // fall through
           case 112: break;
           case 52:
-            { return Token.build(Token._DOUBLE, currentLine);
+            { return Token.build(_DOUBLE, currentLine);
             }
             // fall through
           case 113: break;
           case 53:
-            { return Token.build(Token._READLN, currentLine);
+            { return Token.build(_READLN, currentLine);
             }
             // fall through
           case 114: break;
           case 54:
-            { return Token.build(Token._RETURN, currentLine);
+            { return Token.build(_RETURN, currentLine);
             }
             // fall through
           case 115: break;
           case 55:
-            { return Token.build(Token._STRING, currentLine);
+            { return Token.build(_STRING, currentLine);
             }
             // fall through
           case 116: break;
           case 56:
-            { return Token.build(Token._BOOLEAN, currentLine);
+            { return Token.build(_BOOLEAN, currentLine);
             }
             // fall through
           case 117: break;
           case 57:
-            { return Token.build(Token._EXTENDS, currentLine);
+            { return Token.build(_EXTENDS, currentLine);
             }
             // fall through
           case 118: break;
           case 58:
-            { return Token.build(Token._PRINTLN, currentLine);
+            { return Token.build(_PRINTLN, currentLine);
             }
             // fall through
           case 119: break;
           case 59:
-            { return Token.build(Token._NEWARRAY, currentLine);
+            { return Token.build(_NEWARRAY, currentLine);
             }
             // fall through
           case 120: break;
           case 60:
-            { return Token.build(Token._INTERFACE, currentLine);
+            { return Token.build(_INTERFACE, currentLine);
             }
             // fall through
           case 121: break;
           case 61:
-            { return Token.build(Token._IMPLEMENTS, currentLine);
+            { return Token.build(_IMPLEMENTS, currentLine);
             }
             // fall through
           case 122: break;
