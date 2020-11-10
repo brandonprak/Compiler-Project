@@ -3,7 +3,7 @@ package common;
 public interface TokenTypeID{
 	public static final int _BOOLEAN = 49;	/*Don't think 0 can be used as it may be used by parser for EOF. Replacing w/ next value (49)
                                               because I DO NOT want to change each of the other constants. If anyone else wants to do so
-											  (make _BOOLEAN=1 and the remaining constants counting up) feel free. -R*/
+                                              (make _BOOLEAN=1 and the remaining constants counting up) feel free. -R*/
 	public static final int _BREAK = 1;
 	public static final int _CLASS = 2;
 	public static final int _DOUBLE = 3;
